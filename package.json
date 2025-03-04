@@ -1,0 +1,21 @@
+{
+  "name": "allocations",
+  "version": "0.0.0-alpha",
+  "description": "",
+  "author": "chrisbloom7",
+  "dependencies": {
+    "daisyui": "^5.0.0-beta.9"
+  },
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "license": "MIT",
+  "repository": " ",
+  "private": true
+}

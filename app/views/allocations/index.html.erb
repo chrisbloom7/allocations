@@ -1,0 +1,89 @@
+<div class="container mx-auto p-4 max-w-6xl">
+  <h1 class="font-bold">Prorated Allocations</h1>
+
+  <div class="card bg-base-200 shadow-xl mt-4 grid grid-cols-5 gap-4" data-controller="allocation">
+    <div class="p-6 col-span-3">
+      <div class="m-0">
+        <fieldset class="fieldset">
+          <legend class="fieldset-legend">Total Available Allocation</legend>
+          <label class="input validator">
+            <span class="text-neutral-content">$</span>
+            <input type="number"
+                   class="input w-full"
+                   required
+                   value="100"
+                   min="1"
+                   step="0.01"
+                   title="Must be greater than 0"
+                   data-allocation-target="requestedAllocation"
+                   data-action="input->allocation#compute" />
+          </label>
+          <p class="validator-hint">Must be greater than 0</p>
+        </fieldset>
+      </div>
+      <div data-allocation-target="investorsContainer"></div>
+
+      <button data-action="click->allocation#addInvestor" class="btn btn-secondary">Add Investor</button>
+
+      <template data-allocation-target="investorTemplate">
+        <fieldset data-allocation-target="investor" class="fieldset w-full bg-base-100 border border-base-300 p-4 mb-3 rounded-box relative">
+          <legend class="fieldset-legend">Investor details</legend>
+
+          <div class="grid grid-cols-3 gap-4">
+            <fieldset class="fieldset">
+              <legend class="fieldset-legend">Name</legend>
+              <input type="text"
+                     name="name"
+                     class="input validator"
+                     required
+                     minlength="3"
+                     maxlength="30"
+                     title="Must be 3 to 30 characters"
+                     data-action="input->allocation#compute" />
+              <p class="validator-hint">Must be 3 to 30 characters</p>
+            </fieldset>
+
+            <fieldset class="fieldset">
+              <legend class="fieldset-legend">Requested amount</legend>
+              <label class="fieldset-label input validator">
+                <span class="text-neutral-content">$</span>
+                <input type="number"
+                       name="requested_amount"
+                       class="input w-full"
+                       required
+                       min="0"
+                       step="0.01"
+                       title="Must be greater than or equal to 0"
+                       data-action="input->allocation#compute" />
+              </label>
+              <p class="validator-hint">Must be positive</p>
+            </fieldset>
+
+            <fieldset class="fieldset validator">
+              <legend class="fieldset-legend">Average amount</legend>
+              <label class="fieldset-label input validator">
+                <span class="text-neutral-content">$</span>
+                <input type="number"
+                       name="average_amount"
+                       class="input w-full"
+                       required
+                       min="0"
+                       step="0.01"
+                       title="Must be greater than or equal to 0"
+                       data-action="input->allocation#compute" />
+              </label>
+              <p class="validator-hint">Must be positive</p>
+            </fieldset>
+          </div>
+
+          <button data-action="click->allocation#removeInvestor" class="btn btn-warning btn-xs w-1 absolute top-0 right-2" title="Remove investor">X</button>
+        </fieldset>
+      </template>
+    </div>
+    <aside class="h-full bg-base-100 p-6 col-span-2">
+      <h3>Results</h3>
+      <ul class="list rounded-box shadow-md" data-allocation-target="results">
+      </ul>
+    </aside>
+  </div>
+</div>
