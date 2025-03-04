@@ -4,9 +4,8 @@ This is a Ruby on Rails 8 application that allows users to allocate prorated fun
 
 ## 🚀 Features
 
-- ✅ Search for a location using autocomplete (Stimulus.js + Geocoder + Nominatim API)
-- ✅ Retrieve weather data using OpenWeather API
-- ✅ Cache results using Redis (for faster subsequent requests)
+- ✅ Allocate funds automatically using a proration algorithm
+- ✅ Add new investors and funds to the pool
 - ✅ Live updates using Hotwire/Stimulus
 - ✅ TailwindCSS + DaisyUI for modern UI styling
 
@@ -15,8 +14,8 @@ This is a Ruby on Rails 8 application that allows users to allocate prorated fun
 ### 1️⃣ Clone the Repository
 
 ```shell
-git clone https://github.com/your-username/weather-report.git
-cd weather-report
+git clone https://github.com/chrisbloom7/allocations.git
+cd allocations
 ```
 
 ### 2️⃣ Install Dependencies
@@ -26,23 +25,7 @@ bundle install
 npm install # or yarn install
 ```
 
-You'll also need to install Redis on your machine. You can do this using Homebrew:
-
-```shell
-brew install redis
-```
-
-### 3️⃣ Setup Environment Variables
-
-Create a .env file and add:
-
-```env
-OPENWEATHER_API_KEY=your_api_key_here
-REDIS_URL=your_redis_url_here
-SECRET_KEY_BASE=your_secret_key_here
-```
-
-### 4️⃣ Setup Database
+### 3️⃣ Setup Database
 
 (This project does not require a database, but Rails expects one to be present)
 
@@ -51,7 +34,7 @@ bin/rails db:create
 bin/rails db:migrate
 ```
 
-### 5️⃣ Start the Server
+### 4️⃣ Start the Server
 
 ```shell
 bin/dev
@@ -66,11 +49,3 @@ Run Rails Unit Tests
 ```shell
 bin/rails test
 ```
-
-## 📝 API References
-
-- [OpenWeather API](https://openweathermap.org/api)
-- [Geocoder Gem](https://github.com/alexreisner/geocoder)
-- [Nominatim API](https://nominatim.org/release-docs/develop/api/Search/)
-- [TailwindCSS](https://tailwindcss.com/)
-- [DaisyUI](https://daisyui.com/)
