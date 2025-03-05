@@ -15,6 +15,6 @@ class AllocationsController < ApplicationController
   private
 
   def allocation_params
-    params.permit(:allocation_amount, investor_amounts: [:name, :requested_amount, :average_amount])
+    params.permit(:allocation_amount, investor_amounts: [ :name, :requested_amount, :average_amount ])
   end
 end

@@ -105,13 +105,13 @@ class AllocationService
 
   def log(msg, label: nil, level: :info, indent: 0, break_after: false)
     log_level = case level
-                when :debug
+    when :debug
                   Logger::DEBUG
-                when :info
+    when :info
                   Logger::INFO
-                else
+    else
                   Logger::UNKNOWN
-                end
+    end
 
     case msg
     when String
@@ -139,7 +139,7 @@ class AllocationService
     end
 
     def proration_amount
-      [requested_amount, average_amount].min
+      [ requested_amount, average_amount ].min
     end
 
     def fund(amount)
@@ -148,7 +148,7 @@ class AllocationService
       end
 
       @invested = (@invested + amount).round(2)
-      return amount
+      amount
     end
 
     def investment_status
