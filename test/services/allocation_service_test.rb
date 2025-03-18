@@ -37,6 +37,31 @@ class AllocationServiceTest < ActiveSupport::TestCase
     assert_equal 150, investors.first.requested_amount
     assert_equal 100, investors.first.average_amount
   end
+
+  ALLOCATIONS_DATA_PATH = Rails.root.join("test/fixtures/files/allocations")
+  Dir.glob("*_input.json", base: ALLOCATIONS_DATA_PATH, sort: true) do |input_file|
+    test "Allocations from #{input_file}" do
+      input_file_contents = File.read("#{ALLOCATIONS_DATA_PATH}/#{input_file}")
+      allocation_data = JSON.parse(input_file_contents, symbolize_names: true)
+
+      output_file = input_file.sub(/_input.json\z/, "_output.json")
+      output_file_contents = File.read("#{ALLOCATIONS_DATA_PATH}/#{output_file}")
+      expected_allocations = JSON.parse(output_file_contents, symbolize_names: false).tap do |json|
+        json.each { |k, v| json[k] = v.to_f.round(2) }
+      end
+
+      allocation = AllocationService.new(allocation_data)
+      allocation.fund!
+      actual_allocations = allocation.to_h[:investor_amounts].inject({}) do |memo, investor|
+        memo[investor[:name]] = investor[:invested]
+        memo
+      end
+
+      assert_includes %i[fully_funded partially_funded], allocation.funding_status
+      assert_equal expected_allocations, actual_allocations
+      assert_empty allocation.investors.map(&:investment_status).select { |status| %i[uninvested over_invested].include?(status) }
+    end
+  end
 end
 
 class InvestorTest < ActiveSupport::TestCase

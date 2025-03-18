@@ -30,12 +30,13 @@ class AllocationService
     log "Requested allocation: #{allocation}", level: :debug, indent: 2
 
     # Loop to fund
-    while allocated < allocation && amount_to_raise >= 0.01
+    while allocated < allocation && remaining >= 0.01
       available_investors = investors.select(&:available?)
       log "Raised so far: #{allocated}", level: :debug, indent: 4
       log "Investors available to invest: #{available_investors.size}", level: :debug, indent: 4
       return allocated if available_investors.none?
 
+      amount_to_raise = (allocation - allocated).round(2)
       log "Left to raise: #{amount_to_raise}", level: :debug, indent: 4
 
       total_average_investments = available_investors.sum(&:average_amount)
@@ -73,10 +74,9 @@ class AllocationService
     end
   end
 
-  def amount_to_raise
+  def remaining
     (allocation - allocated).round(2)
   end
-  alias remaining amount_to_raise
 
   # For testing
   def reset!
