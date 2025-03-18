@@ -25,16 +25,7 @@ bundle install
 npm install # or yarn install
 ```
 
-### 3️⃣ Setup Database
-
-(This project does not require a database, but Rails expects one to be present)
-
-```shell
-bin/rails db:create
-bin/rails db:migrate
-```
-
-### 4️⃣ Start the Server
+### 3️⃣ Start the Server
 
 ```shell
 bin/dev
